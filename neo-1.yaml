@@ -1,0 +1,63 @@
+apiVersion: cpln.io/v1
+org: doron-test1
+gvc: my-cat
+metadata:
+  name: neo-1
+  namespace: my-cat
+  resourceVersion: '2'
+  annotations: {}
+kind: workload
+description: neo-1
+tags: {}
+spec:
+  type: standard
+  containers:
+    - cpu: 50m
+      env: []
+      name: neolithics
+      image: /org/doron-test1/image/neolithics:0.1
+      ports:
+        - number: 8080
+          protocol: http
+      memory: 128Mi
+      volumes: []
+      inheritEnv: false
+  loadBalancer:
+    replicaDirect: false
+  localOptions: []
+  defaultOptions:
+    debug: false
+    suspend: false
+    multiZone:
+      enabled: false
+    capacityAI: true
+    autoscaling:
+      metric: disabled
+      target: 95
+      maxScale: 1
+      minScale: 1
+      maxConcurrency: 0
+      scaleToZeroDelay: 300
+    timeoutSeconds: 5
+  firewallConfig:
+    external:
+      inboundAllowCIDR:
+        - 0.0.0.0/0
+      outboundAllowCIDR: []
+      outboundAllowPort: []
+      inboundBlockedCIDR: []
+      outboundBlockedCIDR: []
+      outboundAllowHostname: []
+    internal:
+      inboundAllowType: none
+      inboundAllowWorkload: []
+  requestRetryPolicy:
+    retryOn:
+      - connect-failure
+      - refused-stream
+      - unavailable
+      - cancelled
+      - resource-exhausted
+      - retriable-status-codes
+    attempts: 2
+  supportDynamicTags: false
