@@ -3,7 +3,7 @@ org: doron-test1
 gvc: my-cat
 metadata:
   name: neo-1
-  namespace: default
+  namespace: my-cat
   resourceVersion: '2'
   annotations: {}
 kind: workload
